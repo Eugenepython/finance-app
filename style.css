@@ -1,0 +1,162 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Rubik', sans-serif;
+  background-color: pink;
+  color: #432000;
+  user-select: none;
+}
+
+
+.sign-in-page {
+    background-color: #13253d;
+  text-align: center;
+      display: flex;
+      flex-direction: column;
+      max-width: 320px;
+      margin: 30px auto;
+      border-style:dotted;
+  }
+
+  .home-page {
+    background-color:  #faf5e1; 
+    text-align: center;
+      display: flex;
+      flex-direction: column;
+      max-width: 320px;
+      margin: 30px auto;
+      border-style:dotted;
+  }
+
+
+  
+
+  .container {
+    text-align: center; /* Center-align the content */
+    background-color:  #faf5e1; /* Background color for the container */
+    border: 2px solid #333; /* Add a border for the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+    justify-content: center;
+    border-style:dotted;
+  }
+ 
+  .firstTitle {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Tintin', sans-serif; 
+  }
+
+  .secondTitle {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Tintin', sans-serif; 
+    color: white;
+  }
+
+
+
+ .logo {
+  width: 100%;
+  border-radius :10%;
+ }
+
+  .googleImage {
+    width: 5rem; /* Set a maximum width for the button */
+    height: 5rem; /* Set the button's height */
+    background-image: url("https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png");
+    background-size: contain; /* Ensure the background image fits within the button */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image horizontally and vertically */
+    border: none; /* Remove the button border */
+    cursor: pointer; /* Show a pointer cursor on hover for a clickable button */
+  }
+
+  .googleImage:hover {
+    opacity: 0.8; /* Reduce opacity on hover to indicate interactivity */
+  }
+
+  @font-face {
+    font-family: 'TinTin'; 
+    src: url('./public/TINTIN.ttf') format('truetype');
+  }
+  .firstText {
+    color: black;
+  }
+
+  .secondText {
+    color: white;
+  }
+  
+
+  .cocktail-button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #c82524; /* Red color for danger */
+    color: #fff; /* White text */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cocktail-button:hover {
+    background-color: #8c1f1e; /* Darker red on hover */
+  }
+
+
+  
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:  #faf5e1; 
+  color: #fff;
+  padding: 5px; /* Add padding to the banner */
+  max-width: 100%;
+  font-size:small
+}
+
+.titleImage-container {
+  flex: 1; /* Allow the image container to expand and fill the available space */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titleImage-container img {
+  max-height: 50px; /* Set a maximum height for the image */
+  /* Add any other styling you want for the image */
+}
+
+.home-button, .logout-button {
+  background-color: #c82524;
+  color: #fff;
+  padding: 5px 10px; /* Adjust the padding for the buttons */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.home-button:hover, .logout-button:hover {
+  background-color: #8c1f1e;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid #fff;
+
+}

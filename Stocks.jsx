@@ -22,7 +22,7 @@ const [items, setItems] = useState([]);
 const [buyingStock, setBuyingStock] = useState(false)
 const [sellingStock, setSellingStock] = useState(false)
 
-
+//console.log(dataArray)
 
 const app = initializeApp(firebaseConfig);
 
@@ -49,6 +49,7 @@ async function queryStocksDetails(theArray) {
     let mysteryArray = []
   const promises = theArray.map((item) => {
     const stockDetails = collection(db, `users/${uid}/stocks/ClZGlMuH1YdA9tGzp2tT/${item}`);
+    //console.log(stockDetails)
     return new Promise((resolve) => {
       const unsubscribe = onSnapshot(stockDetails, (snapshot) => {
         snapshot.docs.map((doc) => {
@@ -65,9 +66,15 @@ async function queryStocksDetails(theArray) {
   const updatedArray = mysteryArray.map((item) => ({
   ...item, // Spread the original key-value pairs
             unitValueToday : 0,
-            get heldValue(){ 
-            return (this.unitsHeld* this.unitValueToday)
-            },
+            get heldValue() { 
+              const rawNumber = (this.unitsHeld * this.unitValueToday).toFixed(0);
+              const formattedNumber = parseFloat(rawNumber).toLocaleString('en-US', {
+                  minimumFractionDigits: 0,
+                  maximumFractionDigits: 0,
+                  useGrouping: true, // This option adds commas to the thousands place
+              });
+              return ('£'+formattedNumber);
+          },
             unitValueYesterday: 0,
             unitValueLastWeek: 0,
             get unitValueDayChange(){ 
@@ -93,14 +100,15 @@ async function queryStocksDetails(theArray) {
 }
 
 
-//console.log(stockObject)
-
+const pluralArray = ['github', 'apple', 'pear']
 
 
 useEffect(() => {
   setKeysArray(Object.keys(stockObject))
 }, [stockObject]);
   
+
+
 
 //console.log(dataArray)
 
@@ -116,15 +124,52 @@ useEffect(() => {
 
 
 async function fetchUnitValue(y) {
+  const apiKey = 'Y0A5NE0HBCFDHFRQ';
+  //const stockSymbol = y.stockName;
   try {
-    //const apiKey = 'Y0A5NE0HBCFDHFRQ';
+    //const fetchTimeSeries = async (functionType, interval) => {
+      //const response = await fetch(`https://www.alphavantage.co/query?function=${functionType}&symbol=${stockSymbol}&interval=${interval}&apikey=${apiKey}`);
+    //  const data = await response.json();
+    //  return data;
+    //};
+    //const fetchCurrentPrice = async () => {
+    //  const data = await fetchTimeSeries('GLOBAL_QUOTE', ''); // For daily data, use 'TIME_SERIES_DAILY'
+    //  const currentPrice = data['Global Quote']['05. price']; // Adjust the key based on the data structure
+    //  console.log(`Current price: $${currentPrice}`);
+    //  return parseFloat(currentPrice);
+    //};
+    //const fetchYesterdayClosingPrice = async () => {
+    //  const data = await fetchTimeSeries('TIME_SERIES_DAILY', '1d');
+    //  const dates = Object.keys(data['Time Series (Daily)']);
+    //  const yesterday = dates[1]; // Assuming data is ordered with the most recent date first
+    //  const yesterdayClosingPrice = data['Time Series (Daily)'][yesterday]['4. close'];
+    //  console.log(`Yesterday's closing price: $${yesterdayClosingPrice}`);
+    //  return parseFloat(yesterdayClosingPrice);
+    //};
+    //const fetchPriceSevenDaysAgo = async () => {
+    //  const data = await fetchTimeSeries('TIME_SERIES_DAILY', '7d');
+    //  const dates = Object.keys(data['Time Series (Daily)']);
+    //  const sevenDaysAgo = dates[6];
+    //  const priceSevenDaysAgo = data['Time Series (Daily)'][sevenDaysAgo]['4. close'];
+    //  console.log(`Price 7 days ago: $${priceSevenDaysAgo}`);
+    //  return parseFloat(priceSevenDaysAgo);
+    //};
+    //(async () => {
+    //  const currentPrice = await fetchCurrentPrice();
+    //  const yesterdayClosingPrice = await fetchYesterdayClosingPrice();
+    //  const priceSevenDaysAgo = await fetchPriceSevenDaysAgo();
+    //})();
+
+
+
     //const response = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${stockSymbol}&interval=5min&apikey=${apiKey}`
     //);
+    
     //const data = await response.json();
     //console.log(data)
      //const thePrice = data['Time Series (5min)'][Object.keys(data['Time Series (5min)'])[0]]['1. open'];
      //console.log(thePrice)
-    //const latestPrice = parseInt(thePrice).toFixed(2);
+    //const latestPrice = parseFloat(thePrice).toFixed(2);
     const apikey = 'db11493d'
     const response = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&t=${y.stockName}}`);
     const data = await response.json();
@@ -149,13 +194,13 @@ async function updateAllFetchedUnitValues(items) {
   for (let i = 0; i < items.length; i++) {
     //console.log(`Updating unitValueToday for ${items[i].stockName}`);
     //console.log(items[i].unitValueToday)
-    await fetchUnitValue(items[i]);
+    await fetchUnitValue(copyItems[i]);
+    //await fetchUnitValue(items[i]);
   }
   //console.log(items[0].unitValueToday)
   setItems(copyItems);
   setLoading(false); // Set loading to false
 }
-
 
 
 useEffect(() => {
@@ -169,7 +214,7 @@ useEffect(() => {
 
 
 function addStock() {
-  console.log("add stock")
+  //console.log("add stock")
   setBuyingStock(true)
 }
 
@@ -188,7 +233,7 @@ if (buyingStock === true) {
     <LetsBuyStock dataArray = {dataArray} />
   )} else if (sellingStock === true) {
     return (
-      <LetsSellStock/>
+      <LetsSellStock dataArray = {dataArray}/>
      )} else {
       
 return  (

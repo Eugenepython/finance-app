@@ -337,7 +337,8 @@ return  (
     </div>
       )}
 
-<img className = 'logoSignIn' src={Logo} alt="Logo" />
+<img className = 'cryptoStocksLogo' src={Logo} alt="Logo" />
+<p className = 'bottomTitle'>Rubrikal</p>
     </div>
   ) 
 }

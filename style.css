@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'Rubik', sans-serif;
-  background-color: pink;
+  background-color: #faf5e1;
   color: #432000;
   user-select: none;
   height: 100vh;
@@ -19,7 +19,6 @@ html, body {
       margin-top: 0;
       margin-right:auto;
       margin-left: auto;
-      //margin: 30px auto;
       height: 100vh;
       position: relative;
       border-radius: 10px;
@@ -31,7 +30,6 @@ html, body {
   .container {
     text-align: center; /* Center-align the content */
     background-color:  #faf5e1; /* Background color for the container */
-    //border: 2px solid #333; /* Add a border for the container */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
     justify-content: center;
@@ -43,7 +41,15 @@ html, body {
   width: 100%;
   border-radius :10%;
   position: absolute;
-  bottom: 15%;
+  bottom : 13%;
+  left: 50%; /* Optionally, center the image horizontally */
+  transform: translateX(-50%);
+ }
+ .cryptoStocksLogo {
+  width: 100%;
+  border-radius :10%;
+  position: absolute;
+  bottom : 18%;
   left: 50%; /* Optionally, center the image horizontally */
   transform: translateX(-50%);
  }
@@ -52,7 +58,7 @@ html, body {
     width: 100%;
     border-radius :10%;
     position: absolute;
-    bottom: 5%;
+    bottom: 0%;
     left: 50%; /* Optionally, center the image horizontally */
     transform: translateX(-50%);
   }
@@ -64,6 +70,15 @@ html, body {
     margin-bottom: 20px;
     text-align: center;
     font-family: 'Tintin', sans-serif; 
+  }
+
+  .bottomTitle {
+    font-family: 'Tintin', sans-serif; 
+    position: absolute;
+    bottom : 10%;
+    left: 50%; /* Optionally, center the image horizontally */
+    transform: translateX(-50%);
+    font-size: 25px;
   }
 
   .home-page {
@@ -96,13 +111,13 @@ html, body {
  
 
   .googleImage {
-    width: 8rem; /* Set a maximum width for the button */
-    height: 8rem; /* Set the button's height */
+    width: 8rem; 
+    height: 8rem; 
     background-image: url("https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png");
-    background-size: contain; /* Ensure the background image fits within the button */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-position: center; /* Center the image horizontally and vertically */
-    border: gold 2px solid; /* Add a gold border */
+    background-size: contain; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    border: gold 2px solid; 
     cursor: pointer; 
     border-radius:5%;
   }
@@ -181,7 +196,7 @@ html, body {
 .bottomImage {
   max-height: 100px;
   position: absolute;
-  bottom :5%;
+  bottom : 17%;
   left: 50%; /* Optionally, center the image horizontally */
   transform: translateX(-50%);
 

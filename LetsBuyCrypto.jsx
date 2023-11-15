@@ -400,7 +400,7 @@ function confirmAmountSharesNewStock(event) {
           { showAddToNewStock && (
              <div>
               <p className = 'textForPhone'>Enter the crypto currency name here as recorded on Coingecko</p>
-              <p className = 'textForPhone'>Make sure its not already oin your portfolio</p>
+              <p className = 'textForPhone'>Make sure its not already in your portfolio</p>
               <form onSubmit={confirmNewStockSymbol}>
           <div> 
             <label htmlFor="name">Ticker:</label>

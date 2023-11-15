@@ -58,7 +58,11 @@ return (
         </div>
         
 
-        <div><img className = 'bottomImage' src={tinyLogo} alt="App Logo" /></div>
+        
+          
+          <img className = 'bottomImage' src={tinyLogo} alt="App Logo" />
+          <p className = 'bottomTitle'>Rubrikal</p>
+          
         </div>
         )}
 

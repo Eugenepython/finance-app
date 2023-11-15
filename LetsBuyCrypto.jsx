@@ -8,12 +8,11 @@ import {getFirestore, collection, onSnapshot, doc, updateDoc, addDoc } from "fir
 import { userContext } from '/Context';
 import buy from '/src/buy.jpg';
 
+function LetsBuyCrypto({dataArray}) {
 
-function LetsBuyStock({dataArray}) {
+const masterCollection='cryptoCollection'
+const theId = 'wrZzk7dZSKOl2rSwHUU4'
 
-  const masterCollection='rightStocks'
-  const theId = 'QKjEqBTHxMEU1VEPzh2p'
-  const apiKey = 'cl8aoi9r01qqqm023ln0cl8aoi9r01qqqm023lng'
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); 
 const db = getFirestore(app);
@@ -42,6 +41,7 @@ const [showInitialQuestion, setShowInitialQuestion] = useState(true)
 const [platformValue, setPlatformValue] = useState('');
 const [oldValue, setOldValue] = useState(0)
 const [newStockErrorMessage, setNewStockErrorMessage] = useState('');
+const [unitType, setUnitType] = useState('')
 const [successAdd, setSuccessAdd] = useState(null)
 
 
@@ -96,12 +96,13 @@ function handleSubmit(event) {
     setExistingStock(false)
     setShowingAmountToAdd(true)
   }
-
+//console.log(dataArray)
   useEffect(() => {
   let emptyStocks = []
   for(let i = 0; i < dataArray.length; i++) {
     //console.log(dataArray[i].stockName)
     const stockName = dataArray[i].stockName
+    console.log(stockName)
     const lowStockName = stockName.toLowerCase()
     emptyStocks.push(lowStockName)
     //console.log(emptyStocks)
@@ -113,16 +114,18 @@ function handleSubmit(event) {
   function handleInputChange(event) { //console.log(event.target.value);
     setValue(event.target.value)
 for(let i = 0; i < dataArray.length; i++) {  
+    //console.log(dataArray[i])
   const firstThree = dataArray[i].stockName.substring(0, 3)
   const firstThreeLower = firstThree.toLowerCase()
   const firstThreeLowerThree = firstThreeLower.substring(0, 3)
   const firstThreeCapped = firstThreeLowerThree.charAt(0).toUpperCase() + firstThreeLowerThree.slice(1).toLowerCase()
   const firstThreeCappedThree = firstThreeCapped.substring(0, 3)
   if (firstThree === event.target.value || firstThreeLower === event.target.value || firstThreeLowerThree === event.target.value || firstThreeCapped === event.target.value || firstThreeCappedThree === event.target.value) {
-    //console.log("match")
+    console.log("match")
+    setUnitType(dataArray[i].unitName)
     setValue(dataArray[i].stockName)
     setMatchingStock(true)
-    console.log(matchingStock)
+    //console.log(matchingStock)
   }
   if (event.nativeEvent.inputType === 'deleteContentBackward') {
     setValue('');
@@ -156,14 +159,8 @@ const singleArray = [destinationStock]
 
 //console.log(dataArray)
 async function queryStocksDetails(theArray) {
-  const cappedArray = []
-  for (let i=0; i < theArray.length; i++) {
-   const eachItem = theArray[i]
-  const capppedItem = eachItem.replace(/[\/.]/g, '_');
-    cappedArray.push(capppedItem)
-  }
-  //console.log(cappedArray)
-  const promises = cappedArray.map((item) => {
+  //console.log(theArray)
+  const promises = theArray.map((item) => {
   const stockDetails = collection(db, `users/${uid}/${masterCollection}/${theId}/${item}`);
     return new Promise((resolve) => {
       const unsubscribe = onSnapshot(stockDetails, (snapshot) => {
@@ -171,7 +168,7 @@ async function queryStocksDetails(theArray) {
           const subCollection = y.data();
           //console.log(subCollection.unitsHeld)
           const theElusiveDocumentID = y.id;
-          console.log(theElusiveDocumentID)
+          //console.log(theElusiveDocumentID)
           //setOldValue(parseFloat(subCollection.unitsHeld))
             //console.log(oldValue)
            const theOldValue = subCollection.unitsHeld
@@ -187,7 +184,7 @@ async function queryStocksDetails(theArray) {
 //console.log('UID:', uid);
 //console.log('Document Path:', `users/${uid}/stocks/ClZGlMuH1YdA9tGzp2tT/${item}`);
 //console.log('New Value:', newValue);  
-          console.log(theNewTotal)
+          //console.log(theNewTotal)
           setNewValue(theNewTotal)
           const refStock = doc(db, `users/${uid}/${masterCollection}/${theId}/${item}/${theElusiveDocumentID}`); 
             updateDoc(refStock, { unitsHeld: theNewTotal });
@@ -195,7 +192,7 @@ async function queryStocksDetails(theArray) {
           console.error('Error updating document:', error); 
         } 
       });
-      console.log(newValue)
+      //console.log(newValue)
       unsubscribe(); // Unsubscribe from the listener
       resolve(); // Resolve the promise
     }, (error) => {
@@ -204,13 +201,12 @@ async function queryStocksDetails(theArray) {
   });
 });
 await Promise.all(promises);
-console.log(newValue)
+//console.log(newValue)
 }
 
 
 function getStockDetails() {
     queryStocksDetails(singleArray)
-    
     setShowFinal(false)
     setShowNewValue(true)
   //console.log(singleArray)
@@ -221,47 +217,52 @@ function backToStock(){
   setShowFinal(false)
   showNoTrade(true)
 }
-
+const [lowerCryptoName, setLowerCryptoName] = useState('')
 
 function addingNewStockSymbol(event){
   let input = event.target.value
   let ticker = input.toUpperCase()
   //console.log(event.target.value)
   setNewStockSymbolValue(ticker)
+  setLowerCryptoName((event.target.value).toLowerCase())
 }
+
 
 
 async function confirmNewStockSymbol(event){
   event.preventDefault(); 
+  //console.log(lowerCryptoName)
   let wrongArray = [];
   let pickedArray = [];
   //console.log(newStockSymbolValue)
   //console.log("one")
   try {
     //console.log(newStockSymbolValue)
-const response = await fetch(`https://finnhub.io/api/v1/search?q=${newStockSymbolValue}&token=${apiKey}`);
+    //console.log(lowerCryptoName)
+    const response = await fetch(`https://api.coingecko.com/api/v3/coins/${lowerCryptoName}`)
   const data = await response.json();
-  for (let i = 0; i < data.result.length; i++) {
-    const aTicker = data.result[i]
-  if (newStockSymbolValue === aTicker.symbol) {
+  //console.log(data)
+    const aTicker = data
+  if (lowerCryptoName === aTicker.id) {
     //console.log(aTicker.description)
-    pickedArray.push(aTicker.description)
-    //console.log("two")
+    pickedArray.push(aTicker.id)
+    setUnitType(aTicker.symbol.toLowerCase())
+    console.log(aTicker.symbol)
+    console.log("dsafdsafdsaf!!!!!!!!!")
   } else {
     //console.log("no match")
-    wrongArray.push(aTicker.description)
-  }}
+    wrongArray.push(aTicker.id)
+  }
   //console.log(pickedArray)
   let foundMatch = false;
   //console.log(pickedArray)
   //console.log(dataArray.length)
-
 if (pickedArray.length > 0){
   //console.log(pickedArray[0])
   if (dataArray.some(item => 
-    item.stockName === pickedArray[0]
+    item.cryptoName === pickedArray[0]
     )) {
-    setTheNewStockName(null);
+      setTheNewStockName(null);
     setShowConfirm(false);
     console.log("Ticker already recorded");
     setNewStockErrorMessage("Ticker already recorded");
@@ -272,8 +273,8 @@ if (pickedArray.length > 0){
   }
 } else {
   console.log("nothing was entered ")
+  setNewStockErrorMessage("Check the ticker is correct");
   setTheNewStockName(null);
-  setNewStockErrorMessage("Check the ticker is correct, or not already in your portfolio");
 }
   } catch (error) {
     console.log(error)
@@ -284,6 +285,7 @@ if (pickedArray.length > 0){
 
 
 
+
 async function confirmNewStock() {
   //console.log("confirm identiy of new stock")
   setDestinationStock(theNewStockName)
@@ -291,9 +293,11 @@ async function confirmNewStock() {
   //console.log(newStockSymbolValue + " " + theNewStockName)
   const nameRef = doc(db, `users/${uid}/${masterCollection}/${theId}`);
   //console.log(typeof theNewStockName)
-  const modifiedStockName = theNewStockName.replace(/[\/.]/g, '_');
+  let changedStockName = theNewStockName.replace(/[\/.]/g, '_');
+  const modifiedStockName = changedStockName.toUpperCase();
+  //console.log(modifiedStockName)
   const dataToUpdate = {
-      [modifiedStockName]: 'stock',
+      [modifiedStockName]: 'crypto',
     }
     try {
       await updateDoc(nameRef, dataToUpdate);
@@ -309,14 +313,14 @@ async function confirmNewStock() {
     try {
       await updateDoc(nameRef, dataToUpdate);
       //console.log('Document updated successfully.');
-  
+      //console.log(modifiedStockName)
       // Create a subcollection under the document
       const subcollectionRef = collection(nameRef, modifiedStockName);
       const subcollectionData = {
         platform: platformValue,
         stockName: modifiedStockName,
         stockSymbol: newStockSymbolValue,
-        unitName: 'shares',
+        unitName: unitType,
         unitsHeld: 0,
       };
   
@@ -357,20 +361,23 @@ function confirmAmountSharesNewStock(event) {
 //const [showInitialQuestion, setShowInitialQuestion] = useState(true)
 
 
+//console.log(dataArray[0].unitName)
+
+//console.log(unitType)
   return (
     <div>
-      <h1 className = 'textForPhone'>Adding to Stock</h1>
+      <h1 className = 'textForPhone'>Adding to Crypto</h1>
       {!existingStock && !newStock && !showingAmountToAdd && showInitialQuestion && (
         <div>
-      <p className = 'textForPhone'>If this is a new stock you are adding to your portfolio, click 'New stock.' If already in your portfolio, click "Existing stock.'</p>
-      <button className = 'theseButtons' onClick = {addNewStock}>New stock</button>
-      <button className = 'theseButtons' onClick = {addExistStock}>Existing stock</button>
+      <p className = 'textForPhone'>If this is a new cryptocurrency you are adding to your portfolio, click 'New coin' If already in your portfolio, click "Existing coin.'</p>
+      <button className = 'theseButtons' onClick = {addNewStock}>New coin</button>
+      <button className = 'theseButtons' onClick = {addExistStock}>Existing coin</button>
       </div>
       )}
     {existingStock && !showingAmountToAdd && (
       <form onSubmit={handleSubmit}>
           <div className = 'tempHolder'>
-            <label htmlFor="name">Name of Stock:</label>
+            <label htmlFor="name">Name of Cryptocurrency:</label>
             <input
             className = 'tempInput'
               type="text"
@@ -392,9 +399,10 @@ function confirmAmountSharesNewStock(event) {
        
           { showAddToNewStock && (
              <div>
-              <p className = 'textForPhone'>Enter the stock ticker here</p>
+              <p className = 'textForPhone'>Enter the crypto currency name here as recorded on Coingecko</p>
+              <p className = 'textForPhone'>Make sure its not already oin your portfolio</p>
               <form onSubmit={confirmNewStockSymbol}>
-          <div>
+          <div> 
             <label htmlFor="name">Ticker:</label>
             <input
               type="text"
@@ -410,7 +418,7 @@ function confirmAmountSharesNewStock(event) {
                 >
                 Submit
                 </button>
-                <p>{newStockErrorMessage}</p>
+                <p className = 'textForPhone'>{newStockErrorMessage}</p>
           </form>
           {theNewStockName ? <p className = 'textForPhone'>{theNewStockName}</p> : null}
           {theNewStockName ?
@@ -427,17 +435,17 @@ function confirmAmountSharesNewStock(event) {
           </div>
         : null}
             {showConfirm && platformValue.length > 0 ? (
-            <button className = 'theseButtons'  onClick={confirmNewStock}>Confirm Platform and Stock</button>
-            ) : null}        
+            <button className = 'theseButtons'  onClick={confirmNewStock}>Confirm Platform and Crypto</button>
+            ) : null}            
           </div>
           )}
-          <p className = 'textForPhone' >{successAdd}  </p> 
+            <p className = 'textForPhone' >{successAdd}  </p> 
           {showingAmountToAdd && (
             <div>
             <p className = 'textForPhone'>{value}</p>
             <form onSubmit={confirmAmountExistingAdd}>
             <div>
-            <label htmlFor="name">How many shares did you just buy?:</label>
+            <label htmlFor="name">How much {unitType} did you just buy?:</label>
             <input
               type="number"
               value={valueAddExist}
@@ -457,15 +465,15 @@ function confirmAmountSharesNewStock(event) {
           {showFinal && (
             <div>
               <p className = 'textForPhone'>{value}</p>
-              <p className = 'textForPhone'>{amountToAdd} shares purchased</p>
-              <p className = 'textForPhone'>Confirm adding {amountToAdd} shares to {destinationStock} portfolio?</p>
+              <p className = 'textForPhone'>{amountToAdd} {unitType} purchased</p>
+              <p className = 'textForPhone'>Confirm adding {amountToAdd} {unitType} to {destinationStock} portfolio?</p>
               <button className = 'theseButtons'  onClick = {getStockDetails}>Yes</button>
               <button className = 'theseButtons'  onClick ={backToStock}>No</button>
             </div>
           )}
           {showNewValue && (
             <div>
-            <p className = 'textForPhone'>You now have {newValue} shares of {destinationStock}   </p>
+            <p className = 'textForPhone'>You now have {newValue} {unitType} of {destinationStock}   </p>
             <p className = 'textForPhone'>Click 'Home' to go back</p>
             </div>
           )}
@@ -474,17 +482,14 @@ function confirmAmountSharesNewStock(event) {
               <p className = 'textForPhone'>No trade was made, press Home to go back</p>
             </div>
           )}
-          <div className="titleImage-container"><img src={buy} alt="App Logo" /></div>
+              <div className="titleImage-container"><img src={buy} alt="App Logo" /></div>
     </div>
   );
 }
 
 
 
-export default LetsBuyStock;
+export default LetsBuyCrypto;
 
 /// setShowFinal(false)
-
-
-
 

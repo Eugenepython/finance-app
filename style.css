@@ -5,17 +5,65 @@ html, body {
   background-color: pink;
   color: #432000;
   user-select: none;
+  height: 100vh;
+  
 }
 
 
 .sign-in-page {
-    background-color: #13253d;
+    background-color: #60b3c1;
   text-align: center;
       display: flex;
       flex-direction: column;
-      max-width: 320px;
-      margin: 30px auto;
-      border-style:dotted;
+      max-width: 350px;
+      margin-top: 0;
+      margin-right:auto;
+      margin-left: auto;
+      //margin: 30px auto;
+      height: 100vh;
+      position: relative;
+      border-radius: 10px;
+  }
+
+  
+
+
+  .container {
+    text-align: center; /* Center-align the content */
+    background-color:  #faf5e1; /* Background color for the container */
+    //border: 2px solid #333; /* Add a border for the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
+    justify-content: center;
+    height: 100%;
+    
+    }
+
+  .logoSignIn {
+  width: 100%;
+  border-radius :10%;
+  position: absolute;
+  bottom: 15%;
+  left: 50%; /* Optionally, center the image horizontally */
+  transform: translateX(-50%);
+ }
+
+  .logoBlue {
+    width: 100%;
+    border-radius :10%;
+    position: absolute;
+    bottom: 5%;
+    left: 50%; /* Optionally, center the image horizontally */
+    transform: translateX(-50%);
+  }
+
+ 
+  .firstTitle {
+    font-size: 50px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Tintin', sans-serif; 
   }
 
   .home-page {
@@ -23,34 +71,14 @@ html, body {
     text-align: center;
       display: flex;
       flex-direction: column;
-      max-width: 320px;
-      margin: 30px auto;
-      border-style:dotted;
+      position: relative;
+      max-width: 350px;
+      margin-top: 0;
+      margin-right:auto;
+      margin-left: auto;
   }
-
-
-  
-
-  .container {
-    text-align: center; /* Center-align the content */
-    background-color:  #faf5e1; /* Background color for the container */
-    border: 2px solid #333; /* Add a border for the container */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
-    justify-content: center;
-    border-style:dotted;
-  }
- 
-  .firstTitle {
-    font-size: 30px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Tintin', sans-serif; 
-  }
-
   .secondTitle {
-    font-size: 30px;
+    font-size: 50px;
     font-weight: 500;
     margin-bottom: 20px;
     text-align: center;
@@ -65,15 +93,18 @@ html, body {
   border-radius :10%;
  }
 
+ 
+
   .googleImage {
-    width: 5rem; /* Set a maximum width for the button */
-    height: 5rem; /* Set the button's height */
+    width: 8rem; /* Set a maximum width for the button */
+    height: 8rem; /* Set the button's height */
     background-image: url("https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png");
     background-size: contain; /* Ensure the background image fits within the button */
     background-repeat: no-repeat; /* Prevent the image from repeating */
     background-position: center; /* Center the image horizontally and vertically */
-    border: none; /* Remove the button border */
-    cursor: pointer; /* Show a pointer cursor on hover for a clickable button */
+    border: gold 2px solid; /* Add a gold border */
+    cursor: pointer; 
+    border-radius:5%;
   }
 
   .googleImage:hover {
@@ -90,13 +121,15 @@ html, body {
 
   .secondText {
     color: white;
+    font-family: 'Roboto', 'Droid Sans', 'Segoe UI', Tahoma, Geneva, sans-serif;
+    font-size: 2.2rem;
   }
   
 
   .cocktail-button {
     display: inline-block;
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 26px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -107,6 +140,7 @@ html, body {
     cursor: pointer;
     transition: background-color 0.3s;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 15px;
   }
   
   .cocktail-button:hover {
@@ -131,11 +165,26 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .titleImage-container img {
   max-height: 50px; /* Set a maximum height for the image */
   /* Add any other styling you want for the image */
+
+}
+
+.daddy {
+  position: relative;
+  height: 100vh;
+}
+.bottomImage {
+  max-height: 100px;
+  position: absolute;
+  bottom :5%;
+  left: 50%; /* Optionally, center the image horizontally */
+  transform: translateX(-50%);
+
 }
 
 .home-button, .logout-button {
@@ -159,4 +208,156 @@ html, body {
   padding: 5px;
   border: 1px solid #fff;
 
+}
+
+.theTable{
+  width: 100%;
+}
+
+.stockNameColumn1 {
+  flex: 1;
+  text-align: left;
+  max-width: 32%;
+  font-size: .7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.stockNameColumn2 {
+  flex: 2;
+  text-align: left;
+  max-width: 23%;
+  font-size: .7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stockNameColumn3 {
+  flex: 3;
+  text-align: left;
+  max-width: 19%;
+  font-size: .7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stockNameColumn4 {
+  flex: 4;
+  text-align: left;
+  max-width: 13%;
+  font-size: .7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.stockNameColumn5 {
+  flex: 5;
+  text-align: left;
+  max-width: 13%;
+  font-size: .7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.theseButtons {
+  background-color: #071b36;
+  color: white;
+  padding: 5px;
+  margin: 10px;
+}
+
+.theseButtons1 {
+  background-color: #071b36;
+  color: white;
+  padding: 5px;
+  margin: 10px;
+  width: 100px;
+}
+
+.tempHolder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+
+}
+
+.tempInput {
+  width: 50%;
+}
+
+.breakdownButton {
+  background-color : #165b68;
+  color: white;
+  margin: 10px;
+  padding: 10px;
+  font-size: 1.1rem;
+  border-radius: 3%;
+  max-width: 65px;
+  min-width: 65px;
+ 
+}
+
+.summaryHolder {
+  background-color : #e3e9de;
+  color: #721517;
+  margin: 10px;
+  font: bold;
+  padding: 10px;
+  font-size: 1.2rem;
+  margin-right: 30px;
+  border-radius: 5%;
+}
+
+.totalColumn1{
+  background-color : #e3e9de;
+  color: #165b68;
+  margin: 10px;
+  padding: 5px;
+  font-size: 1.2rem;
+  margin-left: 30px;
+}  
+
+.totalColumn2{
+ background-color : #e3e9de;
+  color: #165b68;
+  margin: 10px;
+  padding: 5px;
+  font-size: 1.2rem;
+  margin-right: 30px;
+}
+
+
+.summaryHolder1{
+  background-color: #721517;
+  color: white;
+  margin: 10px;
+  font: bold;
+  padding: 10px;
+  font-size: 1.2rem;
+  margin-right: 30px;
+  border-radius: 5%;
+}
+
+.thisForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.textForPhone {
+  font-family: 'Roboto', 'Droid Sans', 'Segoe UI', Tahoma, Geneva, sans-serif;
+}
+
+.companyLogo {
+  width: 50px;
+  border-radius: 50%;
 }

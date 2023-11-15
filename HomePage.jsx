@@ -3,8 +3,7 @@ import {useState, useContext} from 'react';
 
 import Breakdown from '/Breakdown';
 import { userContext, changePageContext } from '/Context';
-
-
+import editedLogo from '/src/editedLogo.jpg';
 
 function HomePage({logOut, auth}) {  
 
@@ -19,7 +18,7 @@ const {toBreakdown} = changePage
 <div className="banner">
 <button className="home-button" onClick={toBreakdown} >Home</button>
 <div className="titleImage-container">
-<img src="public/editedLogo.jpg" alt="App Logo" />
+<img src={editedLogo} alt="App Logo" />
 </div>
 <button className="logout-button" onClick={() => logOut(auth)}>Logout</button>
 </div>

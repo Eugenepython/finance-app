@@ -8,11 +8,12 @@ import {getFirestore, collection, onSnapshot, doc, updateDoc } from "firebase/fi
 import { userContext } from '/Context';
 import sell from '/src/sell.jpg';
 
-function LetsSellStock({dataArray}) {
+
+function LetsSellCrypto({dataArray}) {
 
 
-  const masterCollection='rightStocks'
-const theId = 'QKjEqBTHxMEU1VEPzh2p'
+  const masterCollection='cryptoCollection'
+const theId = 'wrZzk7dZSKOl2rSwHUU4'
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app); 
@@ -21,7 +22,7 @@ const user = useContext(userContext);
 const uid = user.userObject.uid
 const [value, setValue] = useState('');
 const [destinationStock, setDestinationStock] = useState(null)
-const theArray = ['tesla', 'github', 'hoover']
+
 const [newStock, setNewStock] = useState(false)
 const [existingStock, setExistingStock] = useState(true)
 const [matchingStock, setMatchingStock] = useState(false)
@@ -35,6 +36,8 @@ const [showNewValue, setShowNewValue] = useState(false)
 const [newValue, setNewValue] = useState(0)
 const [noTrade, showNoTrade] = useState(false)
 let singleArray = [destinationStock]
+
+const [unitType, setUnitType] = useState('')
 
 
 async function fetchStockData(destinationStock) {
@@ -123,7 +126,7 @@ function changeInputAddExist(event) {
     console.log(singleArray)
     queryStocksDetails(singleArray)
   }
-
+console.log(destinationStock)
 
   useEffect(() => {
   let emptyStocks = []
@@ -182,6 +185,8 @@ const promises = cappedArray.map((item) => {
         snapshot.docs.forEach((y) => {
           const subCollection = y.data();
           console.log(subCollection.unitsHeld)
+          console.log(subCollection.unitName)
+          setUnitType(subCollection.unitName)
           const theElusiveDocumentID = y.id;
           setElusiveDocumentID(theElusiveDocumentID)
            const theOldValue = subCollection.unitsHeld
@@ -223,20 +228,16 @@ function backToStock(){
   showNoTrade(true)
 }
 
-
-
 //console.log(dataArray[0].stockName)
   return (
     <div>
-      <h1 className = 'textForPhone'>Selling Stock</h1>
+      <h1 className = 'textForPhone'>Selling Crypto</h1>
       
   
     {existingStock && !showingAmountToAdd && (
-      <div className = 'thisForm'>
-      <form  onSubmit={handleSubmit}>
-      <div>
-            <p className = 'textForPhone'>Enter the name of the stock you have sold</p>
-            
+      <form onSubmit={handleSubmit}>
+          <div>
+            <p className = 'textForPhone'>Enter the cryptocurrency you want to sell</p>
             <label htmlFor="name"></label>
             <input
               type="text"
@@ -245,35 +246,32 @@ function backToStock(){
               value={value}
               onChange={handleInputChange}
             />
-            <div className = 'thisForm'>
-          
-            <button 
-               className = 'theseButtons'
+          </div>
+           <div className='thisForm'>
+                <button className = 'theseButtons'
                 style={matchingStock ? { display: 'block' } : { display: 'none' }}
                 type="submit"
                 >
                 Submit
                 </button>
                 </div>
-            
-            </div>
           </form>
-          
-          </div>
          )}
           {showingAmountToAdd && (
             <div>
-              <p className = 'textForPhone'>You had {oldValue} shares in {destinationStock}</p>
+              <div>You had {oldValue} {unitType} of {destinationStock}</div>
             <p className = 'textForPhone'>{value}</p>
             <form onSubmit={confirmAmountExistingSubtract}>
+    
+            <label htmlFor="name">Number of {unitType} sold:</label>
             <div>
-            <label htmlFor="name">Number of shares sold:</label>
             <input
               type="number"
               value={valueAddExist}
               onChange={changeInputAddExist}
             />
             </div>
+           
             <button 
               className = 'theseButtons'
               type="submit"
@@ -281,7 +279,7 @@ function backToStock(){
             Submit Amount
             </button>
             </form>
-           <p className ='textForPhone'> {noTradeMessage}</p>
+            {noTradeMessage}
             </div>
           )}
 
@@ -297,7 +295,7 @@ function backToStock(){
           )}
           {showNewValue && (
             <div>
-            <p className = 'textForPhone'>You now have {newValue} shares of {destinationStock}   </p>
+            <p className = 'textForPhone'>You now have {newValue} {unitType} of {destinationStock}   </p>
             </div>
           )}
           {noTrade && (
@@ -312,7 +310,7 @@ function backToStock(){
 
 
 
-export default LetsSellStock;
+export default LetsSellCrypto;
 
 /// setShowFinal(false)
 

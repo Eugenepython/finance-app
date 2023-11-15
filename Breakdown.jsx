@@ -4,26 +4,61 @@ import { getAuth, signOut } from 'firebase/auth';
 import Crypto from '/Crypto';
 import Stocks from '/Stocks';
 import { userContext, changePageContext } from '/Context';
+import tinyLogo from '/src/tinyLogo.jpg';
 
 function Breakdown({}) {  
 
-  let theStocks = 500
-  let theCrypto = 400
-  let Total = theStocks + theCrypto
+
+function stringToNumber(string) {
+  if (string){
+  return Number(string.replace(/[^0-9.-]+/g,""))
+  } else {
+    return null
+  }
+}
+
 
   const changePage = useContext(changePageContext);
+  const { setStocksTotal, totalStocks, totalCrypto, setCryptoTotal } = useContext(userContext);
   const {toBreakdown, StocksPage, CryptoPage, showBreakdown, showStocks, showCrypto} = changePage
 //console.log(showStocks)
+
+
+
+const total = stringToNumber(totalStocks) + stringToNumber(totalCrypto)
+
+const currencyTotal = total.toLocaleString('en-US', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 
 return (
         <>
     {showBreakdown && (
-        <div className="breakdown-container">
-        <div className = 'breakdown-row'onClick={StocksPage}><button>Stocks:</button> {theStocks}</div>
+      <div className = 'daddy'>
 
-        <div className = 'breakdown-row' onClick = {CryptoPage}><button>Crypto:</button> {theCrypto}</div>
-        <div className = 'breakdown-row'><div>Total: </div>{Total}</div>
-        <div>Signficant movements</div>   
+      <h1>Assets Summary</h1>
+        
+
+        <div className = 'breakdown-row' onClick={StocksPage}>
+          <div className= 'breakdownButton'>Stocks:</div> 
+          <div className = 'summaryHolder'>{totalStocks? totalStocks : ' Click to find up to date stock market valuation'}</div>
+          </div>
+
+        <div className = 'breakdown-row' onClick = {CryptoPage}>
+          <div className = 'breakdownButton'>Crypto:</div>
+        <div className = 'summaryHolder'>{totalCrypto ? totalCrypto:'Click to Find current crypto value' }</div>
+        </div>
+        <br></br>
+
+        <div className = 'breakdown-row'>
+          <div className = 'breakdownButton'>Total:</div>
+          <div className = 'summaryHolder1'> ${currencyTotal}</div>   
+        </div>
+        
+
+        <div><img className = 'bottomImage' src={tinyLogo} alt="App Logo" /></div>
         </div>
         )}
 

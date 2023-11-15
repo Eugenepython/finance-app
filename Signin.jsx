@@ -7,6 +7,10 @@ import { userContext, changePageContext } from '/Context';
 import HomePage from '/HomePage';
 import Layout from './Layout';
 import firebaseConfig  from "/firebaseConfig"; 
+import Logo from '/src/Logo.jpg';
+import finnHub from '/src/finnHub.png';
+import coinGecko from '/src/coinGecko.png';
+import lightBule from '/src/lightBule.jpg';
 
 
 
@@ -15,6 +19,8 @@ function Signin({}) {
   const [showBreakdown, setShowBreakdown] = useState(true)
   const [showStocks, setShowStocks] = useState(false)
   const [showCrypto, setShowCrypto] = useState(false)
+  const [totalStocks, setStocksTotal] = useState(null)
+  const [totalCrypto, setCryptoTotal] = useState(null)
 
 
 function StocksPage() {
@@ -36,8 +42,6 @@ function toBreakdown() {
   setShowStocks(false);
   setShowCrypto(false);
 }
-
-
 
 const [userObject, setUserObject] = useState( { uid: null, displayName: null, photoURL: null,})
 const [userID, setUserID] = useState(null)
@@ -66,9 +70,6 @@ if (user == null) {
         photoURL: user.photoURL,
     });
     setUserID(uid)
-  
-    const expenseCol = collection(db, `users/${uid}/stocks/ClZGlMuH1YdA9tGzp2tT/github`)
-    //createStream(expenseCol)
     })
 }), [auth]
 
@@ -116,32 +117,37 @@ function conTinue() {
 <div className = 'sign-in-page'>
         {userObject.displayName ? null : (
         <div className = 'container'>
-          <h1 className = 'firstTitle'>Finance Tracker</h1>
+          <h1 className = 'firstTitle'>Rubrikal</h1>
+          <h1>Track your finances here</h1>
+          <p className = 'textForPhone'>In collaboration with Coingecko and Finnhub </p>
+    <img src = {coinGecko} alt = 'coinGecko' className = 'companyLogo'/>
+    <img src = {finnHub} alt = 'finnHub' className = 'companyLogo'/>
         <p className="firstText">Sign in with Google</p>
         <div>
         <button className = 'googleImage' onClick={logIn}>       </button>
         </div>
-        <img className = 'logo' src="public/Logo.jpg" alt="Logo" />
-
+        <img className = 'logoSignIn' src={Logo} alt="Logo" />
+      
         
         </div>
         )}
 
       {userObject.displayName ? (
         <div >
-          <h1 className = 'secondTitle'>Finance Tracker</h1>
+          <h1 className = 'secondTitle'>Rubrikal</h1>
           <h2 className="secondText">{userObject.displayName}</h2>
           <img src={userObject.photoURL} alt="User" />
        
           <p className="secondText">Welcome!</p>
           {userObject.displayName ? <button className = 'cocktail-button' onClick={conTinue}>Continue</button>:null}
+          <img className = 'logoBlue' src={lightBule} alt="Logo" />
         </div>
       ) : null}
 </div>
 )}
 
    
-<userContext.Provider value={{userObject }}>
+<userContext.Provider value={{userObject, setStocksTotal, totalStocks, totalCrypto, setCryptoTotal }}>
 <changePageContext.Provider value={{toBreakdown, StocksPage, CryptoPage, showBreakdown, showStocks, showCrypto}}>
 
       

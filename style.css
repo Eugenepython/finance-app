@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: 'Rubik', sans-serif;
@@ -6,185 +7,195 @@ html, body {
   color: #432000;
   user-select: none;
   height: 100vh;
-  
+
 }
 
 
 .sign-in-page {
-    background-color: #60b3c1;
+  background-color: #60b3c1;
   text-align: center;
-      display: flex;
-      flex-direction: column;
-      max-width: 350px;
-      margin-top: 0;
-      margin-right:auto;
-      margin-left: auto;
-      height: 100vh;
-      position: relative;
-      border-radius: 10px;
-  }
-
-  
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin-top: 0;
+  margin-right: auto;
+  margin-left: auto;
+  height: 100vh;
+  position: relative;
+  border-radius: 10px;
+}
 
 
-  .container {
-    text-align: center; /* Center-align the content */
-    background-color:  #faf5e1; /* Background color for the container */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.5); /* Add a subtle shadow */
-    justify-content: center;
-    height: 100%;
-    
-    }
 
-  .logoSignIn {
+
+.container {
+  text-align: center;
+  /* Center-align the content */
+  background-color: #faf5e1;
+  /* Background color for the container */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, 0.5);
+  /* Add a subtle shadow */
+  justify-content: center;
+  height: 100%;
+
+}
+
+.logoSignIn {
   width: 100%;
-  border-radius :10%;
+  border-radius: 10%;
+
+  bottom: 13%;
+}
+
+.cryptoStocksLogo {
+  width: 100%;
+  border-radius: 10%;
   position: absolute;
-  bottom : 13%;
-  left: 50%; /* Optionally, center the image horizontally */
+  bottom: 18%;
+  left: 50%;
+  /* Optionally, center the image horizontally */
   transform: translateX(-50%);
- }
- .cryptoStocksLogo {
-  width: 100%;
-  border-radius :10%;
+}
+
+
+
+
+.firstTitle {
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Tintin', sans-serif;
+}
+
+.bottomTitle {
+  font-family: 'Tintin', sans-serif;
   position: absolute;
-  bottom : 18%;
-  left: 50%; /* Optionally, center the image horizontally */
+  bottom: 10%;
+  left: 50%;
+  /* Optionally, center the image horizontally */
   transform: translateX(-50%);
- }
+  font-size: 25px;
+}
 
-  .logoBlue {
-    width: 100%;
-    border-radius :10%;
-    position: absolute;
-    bottom: 0%;
-    left: 50%; /* Optionally, center the image horizontally */
-    transform: translateX(-50%);
-  }
+.home-page {
+  background-color: #faf5e1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-width: 350px;
+  margin-top: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
 
- 
-  .firstTitle {
-    font-size: 50px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Tintin', sans-serif; 
-  }
-
-  .bottomTitle {
-    font-family: 'Tintin', sans-serif; 
-    position: absolute;
-    bottom : 10%;
-    left: 50%; /* Optionally, center the image horizontally */
-    transform: translateX(-50%);
-    font-size: 25px;
-  }
-
-  .home-page {
-    background-color:  #faf5e1; 
-    text-align: center;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      max-width: 350px;
-      margin-top: 0;
-      margin-right:auto;
-      margin-left: auto;
-  }
-  .secondTitle {
-    font-size: 50px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    text-align: center;
-    font-family: 'Tintin', sans-serif; 
-    color: white;
-  }
+.secondTitle {
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  text-align: center;
+  font-family: 'Tintin', sans-serif;
+  color: white;
+}
 
 
 
- .logo {
+.logo {
   width: 100%;
-  border-radius :10%;
- }
-
- 
-
-  .googleImage {
-    width: 8rem; 
-    height: 8rem; 
-    background-image: url("https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png");
-    background-size: contain; 
-    background-repeat: no-repeat; 
-    background-position: center; 
-    border: gold 2px solid; 
-    cursor: pointer; 
-    border-radius:5%;
-  }
-
-  .googleImage:hover {
-    opacity: 0.8; /* Reduce opacity on hover to indicate interactivity */
-  }
-
-  @font-face {
-    font-family: 'TinTin'; 
-    src: url('./public/TINTIN.ttf') format('truetype');
-  }
-  .firstText {
-    color: black;
-  }
-
-  .secondText {
-    color: white;
-    font-family: 'Roboto', 'Droid Sans', 'Segoe UI', Tahoma, Geneva, sans-serif;
-    font-size: 2.2rem;
-  }
-  
-
-  .cocktail-button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 26px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background-color: #c82524; /* Red color for danger */
-    color: #fff; /* White text */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    margin: 15px;
-  }
-  
-  .cocktail-button:hover {
-    background-color: #8c1f1e; /* Darker red on hover */
-  }
+  border-radius: 10%;
+}
 
 
-  
+
+.googleImage {
+  width: 6rem;
+  height: 6rem;
+  background-image: url("https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: gold 2px solid;
+  cursor: pointer;
+  border-radius: 5%;
+}
+
+.googleImage:hover {
+  opacity: 0.8;
+  /* Reduce opacity on hover to indicate interactivity */
+}
+
+@font-face {
+  font-family: 'TinTin';
+  src: url('./public/TINTIN.ttf') format('truetype');
+}
+
+.firstText {
+  color: black;
+}
+
+.secondText {
+  color: white;
+  font-family: 'Roboto', 'Droid Sans', 'Segoe UI', Tahoma, Geneva, sans-serif;
+  font-size: 1.2rem;
+}
+
+
+.cocktail-button {
+  display: inline-block;
+  padding: 15px 30px;
+  font-size: 26px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-color: #c82524;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 15px;
+}
+
+.cocktail-button:hover {
+  background-color: #8c1f1e;
+}
+
+.logoBlue {
+  width: 100%;
+  border-radius: 10%;
+  bottom: 0%;
+}
+
+
+
 .banner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color:  #faf5e1; 
+  background-color: #faf5e1;
   color: #fff;
-  padding: 5px; /* Add padding to the banner */
+  padding: 5px;
+  /* Add padding to the banner */
   max-width: 100%;
-  font-size:small
+  font-size: small
 }
 
 .titleImage-container {
-  flex: 1; /* Allow the image container to expand and fill the available space */
+  flex: 1;
+  /* Allow the image container to expand and fill the available space */
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
 }
 
 .titleImage-container img {
-  max-height: 50px; /* Set a maximum height for the image */
+  max-height: 50px;
+  /* Set a maximum height for the image */
   /* Add any other styling you want for the image */
 
 }
@@ -193,26 +204,31 @@ html, body {
   position: relative;
   height: 100vh;
 }
+
 .bottomImage {
   max-height: 100px;
   position: absolute;
-  bottom : 17%;
-  left: 50%; /* Optionally, center the image horizontally */
+  bottom: 17%;
+  left: 50%;
+  /* Optionally, center the image horizontally */
   transform: translateX(-50%);
 
 }
 
-.home-button, .logout-button {
+.home-button,
+.logout-button {
   background-color: #c82524;
   color: #fff;
-  padding: 5px 10px; /* Adjust the padding for the buttons */
+  padding: 5px 10px;
+  /* Adjust the padding for the buttons */
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.home-button:hover, .logout-button:hover {
+.home-button:hover,
+.logout-button:hover {
   background-color: #8c1f1e;
 }
 
@@ -225,7 +241,7 @@ html, body {
 
 }
 
-.theTable{
+.theTable {
   width: 100%;
 }
 
@@ -238,6 +254,7 @@ html, body {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
 .stockNameColumn2 {
   flex: 2;
   text-align: left;
@@ -307,7 +324,7 @@ html, body {
 }
 
 .breakdownButton {
-  background-color : #165b68;
+  background-color: #165b68;
   color: white;
   margin: 10px;
   padding: 10px;
@@ -315,11 +332,11 @@ html, body {
   border-radius: 3%;
   max-width: 65px;
   min-width: 65px;
- 
+
 }
 
 .summaryHolder {
-  background-color : #e3e9de;
+  background-color: #e3e9de;
   color: #721517;
   margin: 10px;
   font: bold;
@@ -329,17 +346,17 @@ html, body {
   border-radius: 5%;
 }
 
-.totalColumn1{
-  background-color : #e3e9de;
+.totalColumn1 {
+  background-color: #e3e9de;
   color: #165b68;
   margin: 10px;
   padding: 5px;
   font-size: 1.2rem;
   margin-left: 30px;
-}  
+}
 
-.totalColumn2{
- background-color : #e3e9de;
+.totalColumn2 {
+  background-color: #e3e9de;
   color: #165b68;
   margin: 10px;
   padding: 5px;
@@ -348,7 +365,7 @@ html, body {
 }
 
 
-.summaryHolder1{
+.summaryHolder1 {
   background-color: #721517;
   color: white;
   margin: 10px;
@@ -359,7 +376,7 @@ html, body {
   border-radius: 5%;
 }
 
-.thisForm{
+.thisForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -375,4 +392,36 @@ html, body {
 .companyLogo {
   width: 50px;
   border-radius: 50%;
+}
+
+
+.table-container {
+  max-height: 400px;
+  /* Set a maximum height for the container */
+  overflow-y: auto;
+  /* Enable vertical scrolling */
+}
+
+.table-container::-webkit-scrollbar {
+  width: 5px;
+  /* Set the width of the scrollbar */
+}
+
+/* Handle */
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #3498db;
+  /* Set the color of the scrollbar handle */
+  border-radius: 3px;
+  /* Set the border-radius to make it round */
+}
+
+/* Handle on hover */
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #2980b9;
+  /* Set a different color when hovering over the scrollbar handle */
+}
+
+/* Add this style to hide the scrollbar track when not hovering */
+.table-container::-webkit-scrollbar-track {
+  background-color: transparent;
 }
